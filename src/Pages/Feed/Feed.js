@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react'
 
 import { View, FlatList } from 'react-native'
 
-import { Post, Header, Avatar, Name, PostImage, Description, Loading } from './Style'
+import { Post, Header, Avatar, Name, Description, Loading } from './Style'
 
+import LazyImage from '../../Components/LazyImage/LazyImage'
 
 export default function Feed(){
     const [feed, setFeed] = useState([])
@@ -64,7 +65,9 @@ export default function Feed(){
                             
                             </Header>
 
-                            <PostImage ratio={item.aspectRatio} source={{uri: item.image}}/>
+                            <LazyImage aspectRatio={item.aspectRatio}
+                                       source={{uri: item.image}}
+                                       smallSource={{uri: item.small}}/>
                             
                             <Description>
                             
