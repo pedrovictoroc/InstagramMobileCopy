@@ -7,17 +7,19 @@ import { Small, Original } from './Style'
 const OriginalAnimated = Animated.createAnimatedComponent(Original);
 
 export default function LazyImage({
-    smallSource, source, aspectRatio
+    smallSource, source, aspectRatio, shouldLoad
 }){
 
     const opacity = new Animated.Value(0);
     const [loaded, setLoaded] = useState(false)
 
     useEffect(()=>{
-        setTimeout(() => {
-            setLoaded(true)
-        }, 1000);
-    },[])
+        if (shouldLoad){
+            setTimeout(() => {
+                setLoaded(true)
+            }, 500);
+        }
+    },[shouldLoad])
 
     function handleAnimated(){
         Animated.timing(opacity,{

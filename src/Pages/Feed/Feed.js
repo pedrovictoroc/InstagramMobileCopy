@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 
 import { View, FlatList } from 'react-native'
 
@@ -12,6 +12,7 @@ export default function Feed(){
     const [total, setTotal] = useState(0)
     const [loading, setLoading] = useState(false)
     const [refresh, setRefresh] = useState(false)
+    const [viewable, setViewable] = useState([]);
 
     async function loadPage(pageNumber = page, shouldRefresh = false){
         if(total && pageNumber>total) return;
@@ -47,16 +48,27 @@ export default function Feed(){
         setRefresh(false)
     }
 
+    
+    const handleViewableChanged = useCallback(({changed})=>{
+        setViewable(changed.map(({item})=> item.id))
+    },[]);
+
+    /* Apenas efetua o handle quando a porcentagem
+       descrita for atingida em cobertura de tela  */
+    const viewabilityConfig = {viewAreaCoveragePercentThreshold: 0}
+
     return(
         <View>
             <FlatList data={feed} 
-                      keyExtractor={post=> String(Math.random())}
+                      keyExtractor={post=> String(post.id)}
                       ListFooterComponent={loading && <Loading/>}
                       onEndReached={()=> loadPage()}
                       /* Determina em que porcentagem vai carregar mais itens */
                       onEndReachedThreshold={0.1}
                       onRefresh={refreshList}
                       refreshing={refresh}
+                      onViewableItemsChanged={handleViewableChanged}
+                      viewabilityConfig={viewabilityConfig}
                       renderItem={({item})=>(
                         <Post>
                             <Header>
@@ -67,7 +79,8 @@ export default function Feed(){
 
                             <LazyImage aspectRatio={item.aspectRatio}
                                        source={{uri: item.image}}
-                                       smallSource={{uri: item.small}}/>
+                                       smallSource={{uri: item.small}}
+                                       shouldLoad={viewable.includes(item.id)}/>
                             
                             <Description>
                             
