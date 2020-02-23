@@ -1,6 +1,20 @@
 # InstagramCopy
 Cópia do instagram com base no vídeos de nome similar da RocketSeat
 
+#### Instruções para execução do código no fim do README
+
+## Loading Page
+<img src="./images/loadingScreen.jpeg" width="200" height="300" />
+
+## Blur Page
+<img src="./images/blur.jpeg" width="200" height="350" />
+
+## Loading Screen
+<img src="./images/loadedScreen.jpeg" width="200" height="350" />
+
+## Loading Spinner
+<img src="./images/loadingSpinner.jpeg" width="200" height="350" />
+
 # Comandos para funcionar
 
 <ol>
