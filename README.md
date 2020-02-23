@@ -9,7 +9,7 @@ Cópia do instagram com base no vídeos de nome similar da RocketSeat
 ## Blur Page
 <img src="./images/blur.jpeg" width="200" height="350" />
 
-## Loading Screen
+## Loaded Screen
 <img src="./images/loadedScreen.jpeg" width="200" height="350" />
 
 ## Loading Spinner
